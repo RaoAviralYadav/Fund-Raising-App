@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { registerUser } from '../../lib/auth';
 import { useRouter } from 'next/navigation';
+import { updateProfile } from 'firebase/auth';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -14,8 +15,13 @@ export default function RegisterPage() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await registerUser(email, password);
-      router.push('/dashboard'); // Redirect after register
+      const userCredential = await registerUser(email, password);
+      const user = userCredential.user;
+
+      // Update profile with display name
+      await updateProfile(user, { displayName: name });
+
+      router.push('/dashboard'); // Redirect
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);

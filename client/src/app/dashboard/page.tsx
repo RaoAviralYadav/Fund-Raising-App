@@ -1,11 +1,18 @@
+'use client';
+
 import DashboardLayout from '../../components/DashboardLayout';
 import Link from 'next/link';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function DashboardHome() {
+  const user = useAuth();
+
   return (
     <DashboardLayout>
       <section className="bg-gradient-to-r from-orange-100 to-yellow-100 p-6 rounded-lg shadow mb-6">
-        <h1 className="text-3xl font-bold text-orange-800 mb-2">Welcome Back, Fundraiser!</h1>
+        <h1 className="text-3xl font-bold text-orange-800 mb-2">
+          Welcome Back{user?.displayName ? `, ${user.displayName}` : ''}!
+        </h1>
         <p className="text-gray-700">
           Ready to crush your next goal and top the leaderboard?
         </p>
@@ -14,9 +21,21 @@ export default function DashboardHome() {
       {/* User Info Card */}
       <div className="bg-white border border-gray-200 rounded-lg shadow p-4 mb-6">
         <h2 className="text-xl font-semibold text-black mb-2">Your Profile</h2>
-        <p className="text-gray-600">Name: <span className="font-medium">John Doe</span></p>
-        <p className="text-gray-600">Email: johndoe@example.com</p>
-        <p className="text-gray-600">Points: <span className="font-semibold">120</span></p>
+        {user ? (
+          <>
+            <p className="text-gray-600">
+              Name: <span className="font-medium">{user.displayName || 'N/A'}</span>
+            </p>
+            <p className="text-gray-600">
+              Email: {user.email}
+            </p>
+            <p className="text-gray-600">
+              Points: <span className="font-semibold">0</span> {/* Placeholder */}
+            </p>
+          </>
+        ) : (
+          <p className="text-gray-500">Loading user info...</p>
+        )}
       </div>
 
       {/* Quick Actions */}
