@@ -1,18 +1,18 @@
 import express from 'express';
-import cors from 'cors';
+import { verifyToken } from './middleware/authMiddleware.js';
 import dotenv from 'dotenv';
-
 dotenv.config();
-const app = express();
-const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+const app = express();
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('API is running...');
+app.get('/protected', verifyToken, (req, res) => {
+  res.json({ message: 'You are verified', user: req.user });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.get('/', (req, res) => {
+  res.send('🚀 Server is running properly!');
 });
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
