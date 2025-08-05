@@ -61,7 +61,26 @@ app.get('/leaderboard', async (req, res) => {
   }
 });
 
+app.get('/user-goals', verifyToken, async (req, res) => {
+  const uid = req.user.uid;
+  try {
+    const goals = await Goal.find({ uid }).sort({ date: -1 }); // recent first
+    const totalPoints = goals.reduce((sum, goal) => sum + goal.points, 0);
+    res.json({ goals, totalPoints });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch user goals' });
+  }
+});
 
+app.get('/user-points', verifyToken, async (req, res) => {
+  const uid = req.user.uid;
+  try {
+    const userPoints = await UserPoints.findOne({ uid });
+    res.json({ points: userPoints?.points || 0 });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch points' });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
