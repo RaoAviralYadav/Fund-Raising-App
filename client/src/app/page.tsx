@@ -8,23 +8,28 @@ export default function HomePage() {
       <main className="pt-20 min-h-screen bg-gradient-to-br from-orange-50 via-yellow-100 to-white transition duration-500">
         {/* Hero Section */}
         <section className="flex items-center justify-center min-h-[80vh] text-center px-4 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-100 via-yellow-50 to-transparent opacity-50 z-0" />
+          {/* Soft animated background icon */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-10 text-orange-200 text-[15rem] select-none pointer-events-none z-0 animate-pulse">
+            💰
+          </div>
+
           <div className="relative z-10 max-w-3xl">
             <h1 className="text-5xl md:text-7xl font-extrabold mb-6 text-orange-700 drop-shadow">
-              Empower. Fundraise. Lead.
+              Raise Funds. Empower Lives.
             </h1>
             <p className="text-lg md:text-xl mb-8 text-gray-700 font-medium">
-              Make every effort count. Track goals, raise funds, and shine on the leaderboard.
+              Track your goals. Inspire generosity. Make impact visible — one donation at a time.
             </p>
-            <div className="space-x-4 mb-6">
+
+            <div className="flex flex-wrap justify-center gap-4 mb-6">
               <Link href="/login">
                 <button className="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition shadow-lg">
-                  Login
+                  Login (Interns/Volunteers)
                 </button>
               </Link>
               <Link href="/register">
                 <button className="px-6 py-2 bg-white text-black border border-gray-300 rounded hover:bg-gray-100 transition shadow">
-                  Register
+                  Register (Volunteer)
                 </button>
               </Link>
             </div>
@@ -33,12 +38,13 @@ export default function HomePage() {
             <div className="mt-4">
               <Link href="/donate">
                 <button className="px-6 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition shadow-lg">
-                  Donate
+                  Donate Now 💖
                 </button>
               </Link>
             </div>
           </div>
         </section>
+
 
         {/* Why Fundraising Matters */}
         <section className="px-6 py-12 bg-white transition duration-500">
