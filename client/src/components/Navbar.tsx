@@ -6,61 +6,58 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="w-full z-50 px-4 py-3 fixed top-0 shadow-md bg-white text-black">
+    <nav className="w-full z-50 px-4 py-3 fixed top-0 shadow-lg bg-gradient-to-r from-orange-100 via-yellow-100 to-white text-black transition duration-500">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left: Title + Nav Links */}
         <div className="flex items-center space-x-6">
-          <Link href="/" className="text-xl font-bold">
-            Fund Raiser
+          <Link href="/" className="text-2xl font-extrabold text-orange-600 hover:text-orange-700 transition">
+            Fund Raiser 
           </Link>
 
-          <div className="hidden md:flex items-center space-x-4">
-            <Link href="/" className="hover:underline">
+          <div className="hidden md:flex items-center space-x-4 font-medium">
+            <Link href="/" className="hover:text-orange-600 transition">
               Home
             </Link>
-            <Link href="/about" className="hover:underline">
+            <Link href="/about" className="hover:text-orange-600 transition">
               About
             </Link>
 
+            {/* Dropdown */}
             <div className="relative group">
-              <button className="hover:underline">Community ▼</button>
-              <div className="absolute hidden group-hover:block mt-1 shadow-md rounded bg-gray-100 text-black">
-                <Link href="/volunteers" className="block px-4 py-2 hover:bg-gray-200">
-                  Volunteers
-                </Link>
-                <Link href="/events" className="block px-4 py-2 hover:bg-gray-200">
-                  Events
-                </Link>
+              <button className="hover:text-orange-600 transition">
+                Community ▼
+              </button>
+              <div className="absolute hidden group-hover:block mt-2 w-40 bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200 z-50">
+                <Link href="/volunteers" className="block px-4 py-2 hover:bg-orange-100 transition">Volunteers</Link>
+                <Link href="/events" className="block px-4 py-2 hover:bg-orange-100 transition">Events</Link>
                 <div className="border-t border-gray-300"></div>
-                <Link href="/partners" className="block px-4 py-2 hover:bg-gray-200">
-                  Partners
-                </Link>
+                <Link href="/partners" className="block px-4 py-2 hover:bg-orange-100 transition">Partners</Link>
               </div>
             </div>
 
-            <Link href="/contact" className="hover:underline">
+            <Link href="/contact" className="hover:text-orange-600 transition">
               Contact
             </Link>
           </div>
         </div>
 
-        {/* Right: Search */}
+        {/* Right: Search + Mobile Toggle */}
         <div className="flex items-center space-x-2">
-          <form className="flex items-center space-x-2">
+          <form className="hidden md:flex items-center space-x-2">
             <input
               type="text"
               placeholder="Search"
-              className="px-2 py-1 rounded border border-gray-400 focus:outline-none focus:ring"
+              className="px-3 py-1 rounded border border-gray-300 focus:outline-none focus:ring focus:ring-orange-200 transition"
             />
             <button
               type="submit"
-              className="px-2 py-1 border rounded border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition"
+              className="px-3 py-1 border rounded border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition"
             >
               Search
             </button>
           </form>
 
-          {/* Mobile Toggle */}
+          {/* Mobile Toggle Button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -88,17 +85,23 @@ export default function Navbar() {
 
       {/* Mobile Menu Links */}
       {isOpen && (
-        <div className="md:hidden mt-2 space-y-2">
-          <Link href="/" className="block hover:underline">
+        <div className="md:hidden mt-2 space-y-2 px-4 pb-4 bg-white border-t border-gray-200 shadow">
+          <Link href="/" className="block hover:text-orange-600 transition">
             Home
           </Link>
-          <Link href="/about" className="block hover:underline">
+          <Link href="/about" className="block hover:text-orange-600 transition">
             About
           </Link>
-          <Link href="/community" className="block hover:underline">
-            Community
+          <Link href="/volunteers" className="block hover:text-orange-600 transition">
+            Volunteers
           </Link>
-          <Link href="/contact" className="block hover:underline">
+          <Link href="/events" className="block hover:text-orange-600 transition">
+            Events
+          </Link>
+          <Link href="/partners" className="block hover:text-orange-600 transition">
+            Partners
+          </Link>
+          <Link href="/contact" className="block hover:text-orange-600 transition">
             Contact
           </Link>
         </div>
@@ -106,3 +109,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
+
