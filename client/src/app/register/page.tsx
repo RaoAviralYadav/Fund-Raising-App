@@ -18,10 +18,8 @@ export default function RegisterPage() {
       const userCredential = await registerUser(email, password);
       const user = userCredential.user;
 
-      // Update profile with display name
       await updateProfile(user, { displayName: name });
-
-      router.push('/dashboard'); // Redirect
+      router.push('/dashboard');
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
@@ -33,41 +31,48 @@ export default function RegisterPage() {
 
   return (
     <main className="pt-20 min-h-screen bg-gradient-to-br from-orange-50 via-yellow-100 to-white px-4 flex items-center justify-center">
-      <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
-        <h1 className="text-2xl font-bold mb-6 text-center text-black">Register</h1>
+      <div className="w-full max-w-md bg-white/80 backdrop-blur-md p-8 rounded-xl shadow-xl transition transform hover:scale-[1.01]">
+        <h1 className="text-3xl font-extrabold mb-2 text-center text-orange-600">Join the Cause 🚀</h1>
+        <p className="text-center text-gray-700 mb-6">Create your account and start making a difference today.</p>
+
         <form onSubmit={handleRegister} className="space-y-4">
           <input
             type="text"
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:ring"
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-orange-200 transition"
+            required
           />
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:ring"
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-orange-200 transition"
+            required
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:ring"
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-orange-200 transition"
+            required
           />
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+
           <button
             type="submit"
-            className="w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
+            className="w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition font-semibold shadow"
           >
             Register
           </button>
         </form>
+
         <p className="mt-4 text-sm text-center text-gray-600">
           Already have an account?{' '}
-          <Link href="/login" className="text-green-600 hover:underline">
+          <Link href="/login" className="text-orange-600 hover:underline font-medium">
             Login
           </Link>
         </p>
